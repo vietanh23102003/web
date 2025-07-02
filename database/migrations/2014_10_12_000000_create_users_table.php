@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->integer('profile_id');
             $table->integer('hobbies_id');
+            
         });
     }
 

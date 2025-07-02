@@ -40,7 +40,7 @@ class HomeController extends Controller
         $user = User::with("profile")->whereId(Auth::user()->id)->first();
         $profile = Profile::find(Auth::user()->profile_id);
         // dd($profile->toArray(), $user->profile->toArray());
-        $hobbies = Hobbie::where('id', Auth::user()->id)->first();
+        $hobbies = Hobbie::find(Auth::user()->hobbies_id);
         $posts = Posts::orderBy('id','desc')->get();
         $photos = Medias::where('user_id', Auth::user()->id)->Where('type', 1)->get();
         // dd($posts);

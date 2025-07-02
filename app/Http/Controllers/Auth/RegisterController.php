@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Hobbie;
@@ -58,7 +59,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['registerPassword']),
             'profile_id' => $this->generateProfileID($data),
             'hobbies_id' => $this->generateHobbiesID($data),
-            'remember_token' => null
+            'remember_token' => Str::random(60),
         ]);
     }
 

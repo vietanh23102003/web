@@ -38,7 +38,7 @@ class ProfileController extends Controller
         $listUser = User::with("profile")->where('id','!=',Auth::user()->id)->get();
         $listMess = messages::distinct()->with('profile')->with('user')->where('to',Auth::user()->id)->where('read_date',NULL)->get();
         $user = User::where('id', $id)->first();
-        $profile = Profile::where('id', $user->profile_id)->first();
+        $profile = Profile::find($user->profile_id);
         $hobbies = Hobbie::where('id', $user->hobbies_id)->first();
         $posts = Posts::orderBy('id','desc')->get();
         // son bong add
@@ -58,7 +58,7 @@ class ProfileController extends Controller
         $listUser = User::with("profile")->where('id','!=',Auth::user()->id)->get();
         $listMess = messages::distinct()->with('profile')->with('user')->where('to',Auth::user()->id)->where('read_date',NULL)->get();
         $user = Auth::user();
-        $profile = Profile::where('id', $user->id)->first();
+        $profile = Profile::find($user->profile_id);
 
         // son bong add
         $id_friends = Friend::where('user_id_1', Auth::id())->where('allow', 0)->get();
@@ -81,24 +81,26 @@ class ProfileController extends Controller
     }
 
     protected function update(array $data, $id) {
-        $user = User::where('id', $id)->first();
+    $user = User::find($id);
+    $user->update([
+        'first_name' => $data['first_name'],
+        'last_name' => $data['last_name'],
+        'email' => $data['email'],
+    ]);
 
-        $user->update([
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'email' => $data['email'],
-        ]);
-        $gender = $data['gender']=="MA"?0:1;
-        $status = $data['status']=="Married"?1:0;
-        Profile::where('id', $user->profile_id)->update([
-            'about_me' => $data['about_me'],
-            'birth_date' => $data['birth_date'],
-            'address' => $data['address'],
-            'gender' => $gender,
-            'phone' => $data['phone'],
-             'status' => $status,
+    $profile = Profile::find($user->profile_id);
+    if ($profile) {
+        $profile->update([
+            'about_me' => $data['about_me'] ?? null,
+            'birth_date' => $data['birth_date'] ?? null,
+            'address' => $data['address'] ?? null,
+            'gender' => ($data['gender'] ?? 'MA') == 'MA' ? 0 : 1,
+            'phone' => $data['phone'] ?? null,
+            'status' => ($data['status'] ?? 'Single') == 'Married' ? 1 : 0,
         ]);
     }
+}
+
 
     public function profile_update_info(Request $request, $id){
         $allRequest  = $request->all();

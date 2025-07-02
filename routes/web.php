@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\LoginController;
+
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FriendController;
@@ -33,7 +34,7 @@ Route::get('/profile', function () {
 });
 
 // Admin
-Route::middleware(['auth','is_admin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::post('/admin/delete-post/{id}', [AdminController::class, 'deletePost']);
@@ -63,7 +64,7 @@ Route::get('/profile/{id}/hobbies_update_info', [HobbieController::class, 'get_h
 Route::post('/profile/{id}/hobbies_update_info', [HobbieController::class, 'hobbies_update_info'])->name('hobbies_update_info');
 
 Route::get('/profile/{id}/friend_requests', [FriendController::class, 'get_request'])->name('friend_requests');
-Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
 Route::post('/profile/{id}/update_avatar', [ProfileController::class, 'update_avatar'])->name('update_avatar');
 Route::post('/profile/{id}/update_header', [ProfileController::class, 'update_header'])->name('update_header');
