@@ -11,7 +11,7 @@
 				<h6 class="title">Tải ảnh</h6>
 			</div>
 
-			<form method="POST" action="{{action('ProfileController@update_header', ['id' => Auth::id()])}}" enctype="multipart/form-data">
+			<form method="POST" action="{{ route('update_header', ['id' => Auth::id()]) }}" enctype="multipart/form-data">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<div class="modal-body">
 					<a href="#" class="upload-photo-item">

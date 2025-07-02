@@ -13,6 +13,6 @@ class IsAdmin
             return $next($request);
         }
 
-        abort(403, 'Bạn không có quyền truy cập.');
+        abort(403, 'Unauthorized');
     }
 }

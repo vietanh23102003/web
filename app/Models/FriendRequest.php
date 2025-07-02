@@ -16,6 +16,6 @@ class FriendRequest extends Model
     ];
     
     public function users(){
-        return $this->belongstoMany('App\users');
+        return $this->belongstoMany('App\Models\users');
     }
 }

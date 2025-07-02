@@ -12,16 +12,16 @@ class messages extends Model
     public $timestamps = false;
 
     public function toUsers(){
-    	return $this->belongstoMany('App\User');
+    	return $this->belongstoMany('App\Models\User');
     }
 
     public function fromUser(){
-    	return $this->belongsto('App\User');
+    	return $this->belongsto('App\Models\User');
     }
     public function profile(){
-    	return $this->hasOne('App\Profile',"id","from");
+    	return $this->hasOne('App\Models\Profile',"id","from");
     }
     public function user(){
-    	return $this->hasOne('App\User',"id","from");
+    	return $this->hasOne('App\Models\User',"id","from");
     }
 }

@@ -2,6 +2,7 @@
 //created by ngavuong
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Posts;
@@ -49,9 +50,9 @@ class PostController extends Controller
                 }
                 else $media->type = 1;
 
-                $hinh = str_random(4)."_".$name;
+                $hinh = Str::random(4)."_".$name;
                 while(file_exists("uploads/".$hinh)){
-                    $hinh = str_random(4)."_".$name;                
+                    $hinh = Str::random(4)."_".$name;                
                 }
                 $file->move("uploads",$hinh); 
                 $media->link = $hinh;          
@@ -141,9 +142,9 @@ class PostController extends Controller
                     }
                     else $media->type = 1;
 
-                    $hinh = str_random(4)."_".$name;
+                    $hinh = Str::random(4)."_".$name;
                     while(file_exists("uploads/".$hinh)){
-                        $hinh = str_random(4)."_".$name;                
+                        $hinh = Str::random(4)."_".$name;                
                     }
                     $file->move("uploads",$hinh); 
                     $media->link = $hinh;          
@@ -175,9 +176,9 @@ class PostController extends Controller
                     }
                     else $media->type = 1;
 
-                    $hinh = str_random(4)."_".$name;
+                    $hinh = Str::random(4)."_".$name;
                     while(file_exists("uploads/".$hinh)){
-                        $hinh = str_random(4)."_".$name;                
+                        $hinh = Str::random(4)."_".$name;                
                     }
                     $file->move("uploads",$hinh); 
                     $media->link = $hinh;          

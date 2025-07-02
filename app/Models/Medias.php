@@ -11,10 +11,10 @@ class Medias extends Model
     protected $table = 'medias';
 
     public function user() {
-        return $this->belongsTo('App\User', 'user_id', 'id');
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
 
     public function post() {
-        return $this->belongsTo('App\Posts', 'post_id', 'id');
+        return $this->belongsTo('App\Models\Posts', 'post_id', 'id');
     }
 }

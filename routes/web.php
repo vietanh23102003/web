@@ -33,7 +33,8 @@ Route::get('/profile', function () {
 });
 
 // Admin
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth','is_admin'])->group(function () {
+
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::post('/admin/delete-post/{id}', [AdminController::class, 'deletePost']);
     Route::post('/admin/delete-user/{id}', [AdminController::class, 'deleteUser']);
@@ -53,6 +54,7 @@ Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('profile'
 Route::get('/about/{id}', [AboutController::class, 'index'])->name('about');
 
 Route::get('/search', [App\Http\Controllers\HomeController::class, 'search'])->name('search');
+Route::post('/search', [HomeController::class, 'search'])->name('search.post');
 
 Route::get('/profile/{id}/profile_update_info', [ProfileController::class, 'get_profile_update_info'])->name('get_profile_update_info');
 Route::post('/profile/{id}/update_info', [ProfileController::class, 'profile_update_info'])->name('profile_update_info');

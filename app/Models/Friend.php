@@ -15,6 +15,6 @@ class Friend extends Model
         'allow'
     ];
     public function users(){
-    	return $this->belongstoMany('App\users');
+    	return $this->belongstoMany('App\Models\users');
     }
 }
